@@ -1,4 +1,4 @@
-// Copyright: the OG Co-Daddies of GoDaddy 2017 Ruthaaaay & Shindy
+// Copyright: the OG Co-Daddies of GoDaddy 2017 Ruthaaaay (Ruthi Sankarram) & Shindy (Cindy Deng)
 
 var origjson;
 var locationList = [];
@@ -57,8 +57,8 @@ function convertToGeoJSON(data) {
     origjson = data;
 
     for(i = 0; i < data.length; i++) {
-				if(myLat + 1 > data[i]["lat"] && myLat- 1 < data[i]["lat"] &&
-					 myLong + 1> data[i]["long"] && myLong- 1< data[i]["long"])
+				if(myLat + 2.5 > data[i]["lat"] && myLat - 2.5 < data[i]["lat"] &&
+					 myLong + 2.5> data[i]["long"] && myLong - 2.5< data[i]["long"])
 					 {
 						// push location
 						currLoc = [];
@@ -135,7 +135,7 @@ function initMap()
 
 	for(i = 0; i < locationList.length; i++)
 	{
-		directionURL += locationList[i][3] + "," + locationList[i][4];
+		directionURL += locationList[i][1];
 		var marker = {
             "type": "Feature",
             "geometry": {
@@ -160,7 +160,6 @@ function initMap()
 			"geometry": {
           "type": 'Point',
           "coordinates": [myLong, myLat]
-         //coordinates:[40.7127, -74.0059]
       },
       "properties": {
           "name": 'Current Location',
@@ -189,6 +188,7 @@ function initMap()
 	 	.setLngLat(currentFeature.geometry.coordinates)
 	    .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
 	      '<h4>' + currentFeature.properties.address + '</h4>' +
+				'<h4>' + "You are " + currentFeature.properties.distance + " miles away." + "</h4>" +
 				'<h4>' + currentFeature.properties.description + "</h4>")
 	    .addTo(map);
 	 }
@@ -196,6 +196,7 @@ function initMap()
 	 popup.setLngLat(currentFeature.geometry.coordinates)
 	    .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
 	      '<h4>' + currentFeature.properties.address + '</h4>' +
+			  '<h4>' + "You are " + currentFeature.properties.distance + " miles away." + "</h4>" +
 				'<h4>' + currentFeature.properties.description + "</h4>");
 	 }
 	}
