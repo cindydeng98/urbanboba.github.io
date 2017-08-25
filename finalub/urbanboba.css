@@ -6,6 +6,7 @@
           margin:0;
           padding:0;
           -webkit-font-smoothing:antialiased;
+          display: block;
         }
 
         * {
@@ -28,8 +29,9 @@
         .map {
           position:absolute;
           width:100%;
-          margin: 0px auto;
-          height:38%;
+          height:65%;
+          top: 0;
+          bottom: 0;
         }
 
         h1 {
@@ -49,20 +51,13 @@
           color:#101010;
         }
 
-        .heading {
-          background:#fff;
-          min-height:60px;
-          line-height:60px;
-          padding:10px;
-          background-color: #383B53;
-          color: #fff;
+        .space{
+          height: 65%;
         }
 
         .listings {
           height:100%;
-          top: 85%;
           overflow:auto;
-          padding-top:45%;
         }
 
         .listings .item {
