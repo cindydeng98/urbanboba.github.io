@@ -146,6 +146,7 @@ function initMap()
 							"name": locationList[i][0],
               "address": locationList[i][1],
               "city": locationList[i][2],
+							"distance": Number(locationList[i][5]).toFixed(3),
               "country": "United States",
 							"description": '<a href="' + directionURL + '" target ="_blank">Go!</a>'
 						}
@@ -185,10 +186,11 @@ function initMap()
 	  // Check if there is already a popup on the map and if so, remove it
 	  if (popUps[0]) popUps[0].remove();
 
-	  var popup = new mapboxgl.Popup({ closeOnClick: false, offset: [-27, -20]})
+	  var popup = new mapboxgl.Popup({ closeOnClick: false})
 	    .setLngLat(currentFeature.geometry.coordinates)
 	    .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
 	      '<h4>' + currentFeature.properties.address + '</h4>' +
+				'<h4> You are ' + currentFeature.properties.distance + ' miles away.</h4>' +
 				'<h4>' + currentFeature.properties.description + "</h4>")
 	    .addTo(map);
 	}
@@ -218,7 +220,7 @@ function initMap()
 		}
 
 		// Add markers to the map at all points
-		new mapboxgl.Marker(el, {offset: [-28, -46]})
+		new mapboxgl.Marker(el, { offset: [0, -56 / 2] })
 				.setLngLat(marker.geometry.coordinates)
 				.addTo(map);
 
@@ -261,7 +263,7 @@ function initMap()
 			link.innerHTML = prop.name;
 
 			var details = listing.appendChild(document.createElement('div'));
-			details.innerHTML = prop.address;
+			details.innerHTML = prop.address + " " + prop.city + ", CA";
 			if (prop.phone) {
 				details.innerHTML += ' &middot; ' + prop.phoneFormatted;
 			}
