@@ -57,8 +57,8 @@ function convertToGeoJSON(data) {
     origjson = data;
 
     for(i = 0; i < data.length; i++) {
-				if(myLat+0.05 > data[i]["lat"] && myLat-0.05 < data[i]["lat"] &&
-					 myLong+0.05 > data[i]["long"] && myLong-0.05 < data[i]["long"])
+				if(myLat + 1 > data[i]["lat"] && myLat- 1 < data[i]["lat"] &&
+					 myLong + 1> data[i]["long"] && myLong- 1< data[i]["long"])
 					 {
 						// push location
 						currLoc = [];
@@ -182,17 +182,22 @@ function initMap()
 	}
 
 	function createPopUp(currentFeature) {
-	  var popUps = document.getElementsByClassName('mapboxgl-popup');
-	  // Check if there is already a popup on the map and if so, remove it
-	  if (popUps[0]) popUps[0].remove();
-
-	  var popup = new mapboxgl.Popup()
-	    .setLngLat(currentFeature.geometry.coordinates)
+	 var popUps = document.getElementsByClassName('mapboxgl-popup');
+	 if(popUps.length == 0)
+	 {
+	 	popup = new mapboxgl.Popup()
+	 	.setLngLat(currentFeature.geometry.coordinates)
 	    .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
 	      '<h4>' + currentFeature.properties.address + '</h4>' +
-				'<h4> You are ' + currentFeature.properties.distance + ' miles away!</h4>' +
 				'<h4>' + currentFeature.properties.description + "</h4>")
 	    .addTo(map);
+	 }
+	 else{
+	 popup.setLngLat(currentFeature.geometry.coordinates)
+	    .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
+	      '<h4>' + currentFeature.properties.address + '</h4>' +
+				'<h4>' + currentFeature.properties.description + "</h4>");
+	 }
 	}
 
   // Add the data to your map as a layer
