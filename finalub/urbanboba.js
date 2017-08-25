@@ -148,7 +148,7 @@ function initMap()
               "city": locationList[i][2],
 							"distance": Number(locationList[i][5]).toFixed(3),
               "country": "United States",
-							"description": '<a href="' + directionURL + '" target ="_blank">Go!</a>'
+							"description": '<a href="' + directionURL + '" target ="_blank"><u>Go!</u></a>'
 						}
 		};
 		directionURL = "https://www.google.com/maps/dir/37.3719931,-122.0390516/";
@@ -186,11 +186,11 @@ function initMap()
 	  // Check if there is already a popup on the map and if so, remove it
 	  if (popUps[0]) popUps[0].remove();
 
-	  var popup = new mapboxgl.Popup({ closeOnClick: false})
+	  var popup = new mapboxgl.Popup()
 	    .setLngLat(currentFeature.geometry.coordinates)
 	    .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
 	      '<h4>' + currentFeature.properties.address + '</h4>' +
-				'<h4> You are ' + currentFeature.properties.distance + ' miles away.</h4>' +
+				'<h4> You are ' + currentFeature.properties.distance + ' miles away!</h4>' +
 				'<h4>' + currentFeature.properties.description + "</h4>")
 	    .addTo(map);
 	}
